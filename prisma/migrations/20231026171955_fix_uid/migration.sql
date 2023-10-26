@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `User` MODIFY `uid` BIGINT NOT NULL;
