@@ -6,11 +6,9 @@ const { Bot, session } = require('grammy');
 
 const { Users } = require('./db/connect');
 
-const { MAIN_MENU, ADMIN_PANEL, BACK_MENU } = require('./locales_keyboards');
+const { MAIN_MENU, ADMIN_PANEL } = require('./locales_keyboards');
 const callback = require('./callback');
 // const { MENU_INFO } = require('./locale_texts');
-
-const config = require('./config');
 
 const scenes = require('./scenes/scenes_handler');
 
@@ -83,6 +81,7 @@ bot.command('start', async ctx => {
         await Users.create({
             tgId: ctx.from.id,
             name: ctx.from.first_name,
+            username: ctx.from.username,
             admin: false
         })
     } 
