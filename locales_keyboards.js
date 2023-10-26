@@ -17,7 +17,10 @@ const ADMIN_PANEL = new InlineKeyboard()
   .row()
   .text('добавить материалы', 'time_work');
 
+const CONTINUE = new InlineKeyboard().text('Далее', 'registration');
+
 module.exports = {
   MAIN_MENU,
   ADMIN_PANEL,
+  CONTINUE,
 };

@@ -1,6 +1,9 @@
 // require("dotenv").config();
 
 const { Composer } = require('grammy');
+const config = require('../config');
+const prisma = require('../db/prisma');
+const { MAIN_MENU } = require('../locales_keyboards');
 
 // const axios = require("axios");
 // const https = require("https");
@@ -284,6 +287,30 @@ const { Composer } = require('grammy');
 // module.exports = callback;
 
 const callbackComposer = new Composer();
+
+callbackComposer.callbackQuery('registration', async ctx => {
+  const isAdmin = config.ownerIds.includes(ctx.msg.from.id) || false;
+  const uid = BigInt(ctx.from.id);
+
+  await prisma.user.upsert({
+    where: { uid },
+    create: {
+      uid,
+      name: ctx.msg.from.first_name,
+      username: ctx.msg.from.username,
+      isAdmin: isAdmin,
+    },
+    update: {},
+  });
+
+  await ctx.editMessageText(
+    `<b>👋 Добро пожаловать в StudyAssistant Bot!</b>\n<b>👇 Выберите нужный вам раздел на клавиатуре</b>`,
+    {
+      parse_mode: 'HTML',
+      reply_markup: MAIN_MENU,
+    },
+  );
+});
 
 callbackComposer.callbackQuery('raspisanie', ctx => {
   ctx.answerCallbackQuery('Расписание');
