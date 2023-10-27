@@ -50,10 +50,10 @@ class MarkovChatbot {
   generateResponse(inputText) {
       const closestQuestion = this.findClosestQuestion(inputText);
       if (closestQuestion) {
-        const distance = Levenshtein.get(inputText, closestQuestion);
-        if (distance > 5) { // Настраиваем порог на ваше усмотрение
-            return "Не знаю ответа на ваш вопрос.";
-        }
+        // const distance = Levenshtein.get(inputText, closestQuestion);
+        // if (distance > 7) { // Настраиваем порог на ваше усмотрение
+        //     return "Не знаю ответа на ваш вопрос.";
+        // }
           const possibleResponses = this.transitions[closestQuestion];
           const response = possibleResponses[Math.floor(Math.random() * possibleResponses.length)];
           this.previousResponses.push(response);
