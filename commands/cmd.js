@@ -9,20 +9,9 @@ const cmd = new Composer();
 cmd.command('start', async ctx => {
   try {
     const uid = BigInt(ctx.from.id);
-
-    // await prisma.user.upsert({
-    //   where: { uid },
-    //   create: {
-    //     uid,
-    //     name: ctx.from.firstName,
-    //     username: ctx.from.username,
-    //     isAdmin: isAdmin,
-    //   },
-    //   update: {},
-    // });
     let user = await prisma.user.findUnique({ where: { uid } });
     if (!user) {
-      return ctx.reply(`<b>Нажимая далее вы принимаете "Пользовательское соглашение"</b>`, {
+      return ctx.reply(`❗️ <b>Нажимая "далее" - вы даете согласие на обработку персональных данных.</b>`, {
         parse_mode: 'HTML',
         reply_markup: CONTINUE,
       });
