@@ -2,7 +2,7 @@ const { InlineKeyboard } = require('grammy');
 
 const MAIN_MENU = new InlineKeyboard()
   .text('Мое расписание', 'raspisanie')
-  .text('Поиск расписания', 'raspisanie_find')
+  // .text('Поиск расписания', 'raspisanie_find')
   .row()
   .text('Режим работы', 'time_work')
   .row()
